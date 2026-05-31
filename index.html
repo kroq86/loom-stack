@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Loom Stack — Python building blocks for long-running agent loops</title>
   <meta name="description" content="Composable Python packages for durable async agent loops. Build resumable local agents, inspectable automation, regression labs, and offline workflows — without Temporal or hosted tracing.">
-  <meta name="keywords" content="Python, async, agents, state machine, tail-call, checkpoint, resume, SQLite, tracing, observability, local-first, durable execution, loom-tailcalls, loom-runner, flow-xray, loom-run, multi-agent">
+  <meta name="keywords" content="Python, async, agents, state machine, tail-call, checkpoint, resume, SQLite, tracing, observability, local-first, durable execution, loom-tailcalls, loom-runner, flow-xray, loom-run, loom-ops, runbook, multi-agent">
   <meta name="author" content="kroq86">
   <link rel="canonical" href="https://kroq86.github.io/loom-stack/">
   <meta property="og:type" content="website">
@@ -41,7 +41,8 @@
     <p class="lede">Three composable packages for <strong>long-running async agent loops</strong>. Each does one job. Wire them together when you need durability and inspectability — not a planner, not memory, not AGI.</p>
     <div class="hero-actions">
       <a class="btn primary" href="#packages">Explore packages</a>
-      <a class="btn" href="#loom-run">Official showcase</a>
+      <a class="btn" href="#loom-run">Dev showcase</a>
+      <a class="btn" href="#loom-ops">Ops product</a>
       <a class="btn" href="#ideas">What you can build</a>
       <a class="btn" href="#quickstart">Quick start</a>
     </div>
@@ -112,8 +113,8 @@
 
         <article class="card highlight">
           <h3>loom-run</h3>
-          <p class="tagline">Official stack showcase</p>
-          <p>Runnable reference product: durable chat agent, multi-agent supervisor, MCP tools, mock LLM for CI. Wires tailcalls + runner + flow-xray end-to-end.</p>
+          <p class="tagline">Dev stack showcase</p>
+          <p>Runnable reference product: durable chat agent on your repo, multi-agent supervisor, MCP tools, mock LLM for CI. Wires tailcalls + runner + flow-xray end-to-end.</p>
           <ul>
             <li><code>loom-run chat</code> / <code>supervise</code></li>
             <li>Checkpoint/resume + <code>explain</code></li>
@@ -124,6 +125,37 @@
             <code>git clone + pip install -e .</code>
           </div>
         </article>
+
+        <article class="card highlight">
+          <h3>loom-ops</h3>
+          <p class="tagline">Ops / runbook product</p>
+          <p>Incident and deploy runbooks: planner → parallel executor + verifier, HITL approve, allowlisted shell, workspace memory. Same loom-runner durability as loom-run.</p>
+          <ul>
+            <li><code>loom-ops supervise</code> / <code>runbook</code></li>
+            <li>HITL <code>approve</code> + audit trail</li>
+            <li>Optional Telegram gateway</li>
+          </ul>
+          <div class="card-links">
+            <a href="https://github.com/kroq86/loom-ops">GitHub</a>
+            <a href="https://github.com/kroq86/loom-ops/blob/main/docs/STACK.md">Stack map</a>
+            <code>git clone + pip install -e .</code>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="products" class="panel two-col">
+      <div>
+        <h2>Which product?</h2>
+        <ul>
+          <li><strong><a href="https://github.com/kroq86/loom-run">loom-run</a></strong> — dev assistant: read repo, search, tests.</li>
+          <li><strong><a href="https://github.com/kroq86/loom-ops">loom-ops</a></strong> — ops runbooks: incident response, approve gates, audit.</li>
+          <li><strong><a href="https://github.com/kroq86/loom-runner">loom-runner</a></strong> — library only: embed checkpoint/resume in your app.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Shared runtime</h2>
+        <p>Both products use <code>loom-runner</code> + <code>flow-xray</code>. Choose the CLI and tools for your domain; do not mix dev chat with production runbooks in one binary.</p>
       </div>
     </section>
 
@@ -206,8 +238,16 @@
       </div>
     </section>
 
+    <section id="loom-ops" class="panel highlight">
+      <h2>loom-ops — runbook ops agent</h2>
+      <p class="section-lede">Product fork for incident/deploy automation where checkpoint/resume and audit matter more than 24/7 chat. Built on the same stack as loom-run.</p>
+      <p><strong>Repo:</strong> <a href="https://github.com/kroq86/loom-ops">github.com/kroq86/loom-ops</a> · <strong>Stack map:</strong> <a href="https://github.com/kroq86/loom-ops/blob/main/docs/STACK.md">docs/STACK.md</a></p>
+      <pre class="flow-diagram">loom-ops supervise  →  planner + executor∥verifier  →  loom-runner  →  --trace trace.html</pre>
+      <p>For dev-repo chat and MCP verifier tools, use <a href="#loom-run">loom-run</a> instead.</p>
+    </section>
+
     <section id="loom-run" class="panel highlight">
-      <h2>loom-run — official showcase</h2>
+      <h2>loom-run — dev showcase</h2>
       <p class="section-lede">Reference product that wires the stack into a resumable chat agent — coordinator step, mock/OpenAI LLM, local tools, optional MCP, multi-agent supervisor (v0.2).</p>
       <blockquote class="pitch">The smallest stack that lets a Python agent run for days, survive crashes, and show you exactly what happened — on your machine.</blockquote>
       <p><strong>Official showcase:</strong> <a href="https://github.com/kroq86/loom-run">github.com/kroq86/loom-run</a></p>
@@ -250,10 +290,13 @@ loom-runner resume examples/counter_agent.py --run-id demo --db runs.sqlite
 loom-runner explain examples/counter_agent.py --run-id demo --db runs.sqlite
 loom-runner run examples/counter_agent.py --run-id demo --trace trace.html
 
-# Official showcase (loom-run)
+# Dev showcase (loom-run)
 loom-run chat "hello" --run-id demo --db runs.sqlite --mock-llm
-loom-run supervise "hello" --run-id team --db runs.sqlite --mock-llm</code></pre>
-      <p>Integration lab in <a href="https://github.com/kroq86/loom-tailcalls/tree/main/demo-loom-flow">demo-loom-flow</a> combines tailcalls + flow-xray (+ optional Ollama). Full stack demo: <a href="https://github.com/kroq86/loom-run">loom-run</a>.</p>
+loom-run supervise "hello" --run-id team --db runs.sqlite --mock-llm
+
+# Ops product (loom-ops)
+loom-ops supervise "incident: API latency" --run-id inc-001 --db ops.sqlite --mock-llm</code></pre>
+      <p>Integration lab in <a href="https://github.com/kroq86/loom-tailcalls/tree/main/demo-loom-flow">demo-loom-flow</a> combines tailcalls + flow-xray (+ optional Ollama). Dev demo: <a href="https://github.com/kroq86/loom-run">loom-run</a>. Ops runbooks: <a href="https://github.com/kroq86/loom-ops">loom-ops</a>.</p>
     </section>
 
     <section id="agi" class="panel note">
@@ -263,7 +306,7 @@ loom-run supervise "hello" --run-id team --db runs.sqlite --mock-llm</code></pre
   </main>
 
   <footer>
-    <p>MIT · <a href="https://github.com/kroq86/loom-tailcalls">loom-tailcalls</a> · <a href="https://github.com/kroq86/loom-runner">loom-runner</a> · <a href="https://github.com/kroq86/flow-xray">flow-xray</a> · <a href="https://github.com/kroq86/loom-run">loom-run (showcase)</a></p>
+    <p>MIT · <a href="https://github.com/kroq86/loom-tailcalls">loom-tailcalls</a> · <a href="https://github.com/kroq86/loom-runner">loom-runner</a> · <a href="https://github.com/kroq86/flow-xray">flow-xray</a> · <a href="https://github.com/kroq86/loom-run">loom-run</a> · <a href="https://github.com/kroq86/loom-ops">loom-ops</a></p>
   </footer>
 </body>
 </html>
