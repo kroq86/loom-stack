@@ -10,14 +10,14 @@
   <link rel="canonical" href="https://kroq86.github.io/loom-stack/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Loom Stack — durable async agent loops in Python">
-  <meta property="og:description" content="Three composable packages: write stack-safe loops, run them with checkpoint/resume, debug with local HTML traces.">
+  <meta property="og:description" content="Five published projects: stack-safe loops, durable runtime, local traces, and proof apps for dev and ops agents.">
   <meta property="og:url" content="https://kroq86.github.io/loom-stack/">
   <meta property="og:image" content="https://kroq86.github.io/loom-stack/assets/loom-stack-og.png">
   <meta property="og:image:alt" content="Loom Stack — durable async agent loops in Python">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://kroq86.github.io/loom-stack/assets/loom-stack-og.png">
   <meta name="twitter:title" content="Loom Stack — Python agent runtime primitives">
-  <meta name="twitter:description" content="loom-tailcalls + loom-runner + flow-xray. Building blocks, not an AGI platform.">
+  <meta name="twitter:description" content="loom-tailcalls + loom-runner + flow-xray + proof apps. Building blocks, not an AGI platform.">
   <link rel="icon" href="assets/loom-stack-logo.png" type="image/png">
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">
@@ -38,7 +38,7 @@
     </a>
     <p class="eyebrow">Python · async · local-first</p>
     <h1>Loom Stack</h1>
-    <p class="lede">Three composable packages for <strong>long-running async agent loops</strong>. Each does one job. Wire them together when you need durability and inspectability — not a planner, not memory, not AGI.</p>
+    <p class="lede">Canonical hub for five Loom projects: <strong>stack-safe loops, durable runtime, offline traces, and proof apps</strong>. Each layer does one job. Wire them together when you need durability and inspectability — not a planner, not memory, not AGI.</p>
     <div class="hero-actions">
       <a class="btn primary" href="#packages">Explore packages</a>
       <a class="btn" href="#loom-run">Dev showcase</a>
@@ -52,8 +52,11 @@
   <main>
     <section id="flow" class="panel">
       <h2>How the stack fits together</h2>
-      <pre class="flow-diagram" aria-label="Stack flow diagram">@tailrec agent loop  →  loom-runner run/resume  →  --trace trace.html
-     (shape)                  (durability)              (flow-xray)</pre>
+      <pre class="flow-diagram" aria-label="Stack flow diagram">loom-tailcalls  →  loom-runner  →  flow-xray
+  primitive          runtime       microscope
+       \                \             \
+        \                +---- loom-run / loom-ops proof apps
+         +---- loom-stack docs hub</pre>
       <ol class="flow-steps">
         <li><strong>Write</strong> explicit state transitions with stack-safe <code>@tailrec</code>.</li>
         <li><strong>Run</strong> with SQLite checkpoint/resume, retries, and CLI inspection.</li>

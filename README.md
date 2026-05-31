@@ -2,7 +2,8 @@
 
 # Loom Stack — GitHub Pages
 
-Landing site for the composable Loom Python packages:
+Canonical hub for the Loom Python stack. This repo is not a sixth product; it
+is the shared map, landing page, and cross-repo documentation for:
 
 - [loom-tailcalls](https://github.com/kroq86/loom-tailcalls)
 - [loom-runner](https://github.com/kroq86/loom-runner)
@@ -13,6 +14,17 @@ Landing site for the composable Loom Python packages:
 **Live site:** https://kroq86.github.io/loom-stack/
 
 **Full ecosystem map (repos + PyPI):** [docs/ECOSYSTEM.md](docs/ECOSYSTEM.md)
+
+## Stack shape
+
+```text
+loom-tailcalls  ->  loom-runner  ->  flow-xray
+   primitive          runtime        microscope
+        \                 \              \
+         \                 +---- loom-run / loom-ops proof apps
+          \
+           +---- loom-stack = canonical docs, not a runtime dependency
+```
 
 ## Brand assets
 

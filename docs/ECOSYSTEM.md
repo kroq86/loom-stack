@@ -2,7 +2,20 @@
 
 **Hub:** https://kroq86.github.io/loom-stack/
 
-Composable Python packages for **durable async agent loops**: shape → checkpoint → trace → product CLIs.
+`loom-stack` is the canonical documentation and trust hub. It is not another
+runtime package and should not be imported by the five projects.
+
+Composable Python packages for **durable async agent loops**: primitive →
+runtime → microscope → proof apps.
+
+```text
+loom-tailcalls  ->  loom-runner  ->  flow-xray
+   primitive          runtime        microscope
+        \                 \              \
+         \                 +---- loom-run / loom-ops proof apps
+          \
+           +---- loom-stack docs hub
+```
 
 ## Core libraries (PyPI)
 
