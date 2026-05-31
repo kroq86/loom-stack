@@ -54,6 +54,12 @@ Ops flow details: [loom-ops/docs/STACK.md](https://github.com/kroq86/loom-ops/bl
 | Incident / runbook agent | `loom-ops` |
 | Debug a run | `flow-xray` + `loom-runner explain` |
 
+## PyPI publish (maintainers)
+
+Each package repo uses `.github/workflows/publish.yml` (or `publish-pypi.yml`) on **GitHub Release** or `workflow_dispatch`. Requires repository secret **`PYPI_API_TOKEN`** (PyPI → Account → API token with upload scope for that project, or entire account).
+
+Repos that already publish (`loom-runner`, `loom-tailcalls`, `flow-xray`) have the secret configured. **Copy the same secret** into `loom-ops`, `loom-run`, `rule-based-verifier`, `mcp-docs-memory`, and `data-engineering-runtime-lab` (Settings → Secrets → Actions), then publish or re-run the workflow for an existing release tag.
+
 ## Stack flow
 
 ```text
