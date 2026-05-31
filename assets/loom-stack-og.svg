@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title">
+  <title id="title">Loom Stack  social preview</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1110"/>
+      <stop offset="100%" stop-color="#171a18"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a68437"/>
+      <stop offset="50%" stop-color="#d4a853"/>
+      <stop offset="100%" stop-color="#a68437"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="626" width="1200" height="4" fill="url(#gold)"/>
+
+  <g transform="translate(120 140)" fill="none" stroke="#d4a853" stroke-width="6" stroke-linecap="round">
+    <path d="M0 30 C45 0 105 0 150 30 C105 60 45 60 0 30 Z"/>
+    <path d="M0 80 C45 50 105 50 150 80 C105 110 45 110 0 80 Z" opacity="0.7"/>
+    <path d="M30 0 L30 110" stroke="#7ec8a8" stroke-width="4"/>
+    <path d="M120 0 L120 110" stroke="#7ec8a8" stroke-width="4"/>
+  </g>
+
+  <text x="320" y="210" fill="#e8ece9" font-family="Georgia, serif" font-size="72" font-weight="700">Loom Stack</text>
+  <text x="322" y="280" fill="#9aa89f" font-family="Georgia, serif" font-size="32">Python building blocks for long-running agent loops</text>
+  <text x="322" y="340" fill="#7ec8a8" font-family="ui-monospace, monospace" font-size="24">checkpoint · resume · inspect · local HTML traces</text>
+
+  <g transform="translate(320 400)" font-family="ui-monospace, monospace" font-size="20" font-weight="600">
+    <rect x="0" y="0" width="820" height="72" rx="12" fill="#171a18" stroke="#2a302c" stroke-width="2"/>
+    <text x="410" y="44" fill="#d4a853" text-anchor="middle">tailcalls  ’  runner  ’  flow-xray  ’  loom-run (showcase)</text>
+  </g>
+
+  <text x="60" y="590" fill="#9aa89f" font-family="ui-monospace, monospace" font-size="22">kroq86.github.io/loom-stack</text>
+</svg>

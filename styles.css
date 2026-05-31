@@ -32,6 +32,22 @@ a:hover { color: var(--accent); }
   text-align: center;
 }
 
+.hero-banner {
+  display: block;
+  margin: 0 auto 1.5rem;
+  max-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  line-height: 0;
+}
+
+.hero-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .eyebrow {
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
   font-size: 0.8rem;
