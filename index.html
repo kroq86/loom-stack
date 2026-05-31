@@ -184,11 +184,13 @@
     </section>
 
     <section id="loom-run" class="panel highlight">
-      <h2>Product direction: Loom Run</h2>
-      <p class="section-lede">One name for the thing the stack enables — not another agent framework:</p>
+      <h2>Loom Run (product)</h2>
+      <p class="section-lede">Reference implementation that wires the stack into a resumable chat agent — coordinator step, mock/OpenAI LLM, local tools, optional MCP.</p>
       <blockquote class="pitch">The smallest stack that lets a Python agent run for days, survive crashes, and show you exactly what happened — on your machine.</blockquote>
-      <p><strong>MVP slice:</strong> <code>AgentRunner</code> + LLM adapter + a few typed tools + CLI (<code>run</code> / <code>resume</code> / <code>explain</code> / <code>--trace</code>) + golden scenarios in CI.</p>
-      <p class="muted-inline">Still missing if you want a full product: planner, memory, multi-agent graphs, hosted SaaS, human-in-the-loop UI. Loom stack covers <strong>shape + durability + local inspect</strong> only.</p>
+      <p><strong>Repo:</strong> <a href="https://github.com/kroq86/loom-run">github.com/kroq86/loom-run</a></p>
+      <pre class="flow-diagram">loom-run chat  →  coordinator (LLM + tools)  →  loom-runner  →  --trace trace.html</pre>
+      <p><strong>Extended kroq86 stack</strong> (optional MCP): <a href="https://github.com/kroq86/agents_architecture">agents_architecture</a> pattern, <a href="https://github.com/kroq86/rule-based-verifier">rule-based-verifier</a>, <a href="https://github.com/kroq86/mcp-docs-memory">mcp-docs-memory</a>.</p>
+      <p class="muted-inline">Not a full port of agents_architecture — a portable shell with local fallbacks when MCP is unset.</p>
     </section>
 
     <section id="compare" class="panel">
