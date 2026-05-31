@@ -12,6 +12,8 @@ Landing site for the composable Loom Python packages:
 
 **Live site:** https://kroq86.github.io/loom-stack/
 
+**Full ecosystem map (repos + PyPI):** [docs/ECOSYSTEM.md](docs/ECOSYSTEM.md)
+
 ## Brand assets
 
 Shared banner, logo, and OG image: [assets/](assets/) · [assets/README.md](assets/README.md)
