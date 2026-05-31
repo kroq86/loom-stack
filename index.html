@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Loom Stack — Python building blocks for long-running agent loops</title>
-  <meta name="description" content="Composable Python packages for durable async agent loops: loom-tailcalls (stack-safe transitions), loom-runner (checkpoint/resume), flow-xray (local HTML traces). No cloud, no AGI hype.">
-  <meta name="keywords" content="Python, async, agents, state machine, tail-call, checkpoint, resume, SQLite, tracing, observability, loom-tailcalls, loom-runner, flow-xray">
+  <meta name="description" content="Composable Python packages for durable async agent loops. Build resumable local agents, inspectable automation, regression labs, and offline workflows — without Temporal or hosted tracing.">
+  <meta name="keywords" content="Python, async, agents, state machine, tail-call, checkpoint, resume, SQLite, tracing, observability, local-first, durable execution, loom-tailcalls, loom-runner, flow-xray">
   <meta name="author" content="kroq86">
   <link rel="canonical" href="https://kroq86.github.io/loom-stack/">
   <meta property="og:type" content="website">
@@ -34,6 +34,7 @@
     <p class="lede">Three composable packages for <strong>long-running async agent loops</strong>. Each does one job. Wire them together when you need durability and inspectability — not a planner, not memory, not AGI.</p>
     <div class="hero-actions">
       <a class="btn primary" href="#packages">Explore packages</a>
+      <a class="btn" href="#ideas">What you can build</a>
       <a class="btn" href="#quickstart">Quick start</a>
     </div>
   </header>
@@ -120,6 +121,74 @@
           <li>Anyone looking for reasoning, planning, memory, or an AGI product.</li>
         </ul>
       </div>
+    </section>
+
+    <section id="unlock" class="panel">
+      <h2>What changed</h2>
+      <p class="section-lede">Nothing here was physically impossible before — but it used to mean Temporal, LangGraph, hosted tracing, or months of custom infra. Loom stack makes a <strong>local-first durable agent runtime</strong> realistic for one builder.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Problem</th><th>Before</th><th>With Loom stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>100k-step loop</td><td><code>RecursionError</code> or messy manual <code>while</code></td><td><code>@tailrec</code> (tailcalls)</td></tr>
+            <tr><td>Crash on step 47</td><td>Start over</td><td><code>loom-runner resume</code></td></tr>
+            <tr><td>What happened?</td><td>Log grep or cloud trace account</td><td><code>explain</code> + local HTML (flow-xray)</td></tr>
+            <tr><td>Retries duplicate side effects</td><td>Roll your own idempotency</td><td><code>RunContext.call_tool</code></td></tr>
+            <tr><td>Everything offline</td><td>Hard to assemble</td><td>Three pip packages, SQLite, one HTML file</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="ideas" class="panel">
+      <h2>What you can build</h2>
+      <p class="section-lede">The stack is a runtime primitive, not a finished product. These are concrete directions people can ship on top — without AGI claims.</p>
+      <div class="cards ideas">
+        <article class="card idea-card">
+          <h3>Resumable local agent</h3>
+          <p class="tagline">Hours or days · crash-safe · explainable</p>
+          <p>LLM + tools on Ollama or an API. Run until budget or completion; kill the process; <code>resume</code> later. After an incident: <code>explain</code> plus <code>--trace trace.html</code>.</p>
+          <p class="idea-before"><strong>Before:</strong> custom checkpoint store, retries, and debug tooling.<br><strong>Now:</strong> glue model + tools onto <code>AgentRunner</code>. See <a href="https://github.com/kroq86/loom-tailcalls/tree/main/demo-loom-flow">demo-loom-flow</a>.</p>
+        </article>
+
+        <article class="card idea-card">
+          <h3>Inspectable automation</h3>
+          <p class="tagline">Not an LLM · long pipelines · no cloud</p>
+          <p>Poll APIs, transform, notify, repeat — as an explicit state machine. Every transition checkpointed; <code>history</code> and <code>attempts</code> when something breaks at 3am.</p>
+          <p class="idea-before"><strong>Before:</strong> Celery, cron scripts, or hope it does not crash.<br><strong>Now:</strong> same <code>@tailrec</code> loop + loom-runner.</p>
+        </article>
+
+        <article class="card idea-card">
+          <h3>Agent regression lab</h3>
+          <p class="tagline">CI gate · compare runs · local traces</p>
+          <p>Golden scenarios with mock or real models. Compare checkpoint history and HTML traces across prompt or code changes — a verifiable gate, not vibes.</p>
+          <p class="idea-before"><strong>Before:</strong> bespoke harness + hosted observability.<br><strong>Now:</strong> pytest + loom-runner + flow-xray in CI.</p>
+        </article>
+
+        <article class="card idea-card">
+          <h3>Audit-friendly runner</h3>
+          <p class="tagline">Every step stored · offline explain</p>
+          <p>Workflows where you must show what ran, how many times, and why it failed — SQLite checkpoints plus CLI inspection, no enterprise orchestration platform required.</p>
+          <p class="idea-before"><strong>Before:</strong> workflow engine procurement.<br><strong>Now:</strong> narrow vertical on loom-runner.</p>
+        </article>
+
+        <article class="card idea-card">
+          <h3>Intermittent / offline loops</h3>
+          <p class="tagline">Bad network · checkpoint · continue later</p>
+          <p>Field sync, protocol sessions, or batch jobs that cannot assume a stable process or connection. Durable state machines that are not tied to LLMs at all.</p>
+          <p class="idea-before"><strong>Before:</strong> hand-rolled persistence per project.<br><strong>Now:</strong> tailcalls shape + runner durability.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="loom-run" class="panel highlight">
+      <h2>Product direction: Loom Run</h2>
+      <p class="section-lede">One name for the thing the stack enables — not another agent framework:</p>
+      <blockquote class="pitch">The smallest stack that lets a Python agent run for days, survive crashes, and show you exactly what happened — on your machine.</blockquote>
+      <p><strong>MVP slice:</strong> <code>AgentRunner</code> + LLM adapter + a few typed tools + CLI (<code>run</code> / <code>resume</code> / <code>explain</code> / <code>--trace</code>) + golden scenarios in CI.</p>
+      <p class="muted-inline">Still missing if you want a full product: planner, memory, multi-agent graphs, hosted SaaS, human-in-the-loop UI. Loom stack covers <strong>shape + durability + local inspect</strong> only.</p>
     </section>
 
     <section id="compare" class="panel">

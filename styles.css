@@ -220,6 +220,41 @@ pre code {
   color: var(--text);
 }
 
+.section-lede {
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+.idea-before {
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.idea-card h3 { color: var(--text); }
+
+.highlight {
+  border-color: var(--accent-dim);
+  background: linear-gradient(180deg, #1a1814 0%, var(--surface) 100%);
+}
+
+.pitch {
+  margin: 0 0 1rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  background: var(--code-bg);
+  color: var(--text);
+  font-style: italic;
+}
+
+.muted-inline {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .note p { margin: 0; color: var(--muted); }
 
 footer {
