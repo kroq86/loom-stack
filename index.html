@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loom Stack — Python building blocks for long-running agent loops</title>
+  <meta name="description" content="Composable Python packages for durable async agent loops: loom-tailcalls (stack-safe transitions), loom-runner (checkpoint/resume), flow-xray (local HTML traces). No cloud, no AGI hype.">
+  <meta name="keywords" content="Python, async, agents, state machine, tail-call, checkpoint, resume, SQLite, tracing, observability, loom-tailcalls, loom-runner, flow-xray">
+  <meta name="author" content="kroq86">
+  <link rel="canonical" href="https://kroq86.github.io/loom-stack/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Loom Stack — durable async agent loops in Python">
+  <meta property="og:description" content="Three composable packages: write stack-safe loops, run them with checkpoint/resume, debug with local HTML traces.">
+  <meta property="og:url" content="https://kroq86.github.io/loom-stack/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Loom Stack — Python agent runtime primitives">
+  <meta name="twitter:description" content="loom-tailcalls + loom-runner + flow-xray. Building blocks, not an AGI platform.">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Loom Stack",
+    "url": "https://kroq86.github.io/loom-stack/",
+    "description": "Composable Python packages for long-running async agent loops.",
+    "author": { "@type": "Person", "name": "kroq86" }
+  }
+  </script>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Python · async · local-first</p>
+    <h1>Loom Stack</h1>
+    <p class="lede">Three composable packages for <strong>long-running async agent loops</strong>. Each does one job. Wire them together when you need durability and inspectability — not a planner, not memory, not AGI.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#packages">Explore packages</a>
+      <a class="btn" href="#quickstart">Quick start</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="flow" class="panel">
+      <h2>How the stack fits together</h2>
+      <pre class="flow-diagram" aria-label="Stack flow diagram">@tailrec agent loop  →  loom-runner run/resume  →  --trace trace.html
+     (shape)                  (durability)              (flow-xray)</pre>
+      <ol class="flow-steps">
+        <li><strong>Write</strong> explicit state transitions with stack-safe <code>@tailrec</code>.</li>
+        <li><strong>Run</strong> with SQLite checkpoint/resume, retries, and CLI inspection.</li>
+        <li><strong>Debug</strong> locally — one HTML file, no hosted tracing account.</li>
+      </ol>
+    </section>
+
+    <section id="packages" class="panel">
+      <h2>Packages</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>loom-tailcalls</h3>
+          <p class="tagline">Stack-safe async transitions</p>
+          <p>Turn tail-position <code>return await fn(...)</code> into an async <code>while</code> loop. Keep the state-machine shape; lose the stack growth.</p>
+          <ul>
+            <li><code>@tailrec</code> and <code>@tailstream</code></li>
+            <li><code>explain_tailcalls()</code> for rejected shapes</li>
+            <li>Python 3.11+</li>
+          </ul>
+          <div class="card-links">
+            <a href="https://github.com/kroq86/loom-tailcalls">GitHub</a>
+            <a href="https://pypi.org/project/loom-tailcalls/">PyPI</a>
+            <code>pip install loom-tailcalls</code>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>loom-runner</h3>
+          <p class="tagline">Checkpoint, resume, inspect</p>
+          <p>Durable async transition runner on SQLite. Idempotent managed tool calls, retry policies, and CLI commands to explain a run after the fact.</p>
+          <ul>
+            <li><code>run</code> / <code>resume</code> / <code>explain</code></li>
+            <li><code>history</code>, <code>attempts</code>, <code>tool-calls</code></li>
+            <li><code>--trace trace.html</code> via flow-xray</li>
+          </ul>
+          <div class="card-links">
+            <a href="https://github.com/kroq86/loom-runner">GitHub</a>
+            <a href="https://pypi.org/project/loom-runner/">PyPI</a>
+            <code>pip install loom-runner</code>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>flow-xray</h3>
+          <p class="tagline">Local HTML execution traces</p>
+          <p>See LLM calls, tool calls, branches, errors, tokens, and cost in one offline HTML file. Use standalone or through loom-runner.</p>
+          <ul>
+            <li><code>@trace</code> decorator</li>
+            <li>Single-file HTML export</li>
+            <li>No cloud account</li>
+          </ul>
+          <div class="card-links">
+            <a href="https://github.com/kroq86/flow-xray">GitHub</a>
+            <a href="https://pypi.org/project/flow-xray/">PyPI</a>
+            <code>pip install flow-xray</code>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="audience" class="panel two-col">
+      <div>
+        <h2>Who it is for</h2>
+        <ul>
+          <li>Authors of <strong>long-running async agent loops</strong> who need checkpoint/resume without building their own store.</li>
+          <li>Teams that want <strong>inspectable runs</strong> (<code>explain</code>, attempt history) instead of a black box.</li>
+          <li>Indie builders who want a <strong>small Python slice</strong> before adopting a full orchestration platform.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Who it is not for</h2>
+        <ul>
+          <li>Single LLM call + single tool call workflows.</li>
+          <li>Teams already happy with LangGraph, Temporal, or similar persistence.</li>
+          <li>Anyone looking for reasoning, planning, memory, or an AGI product.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="compare" class="panel">
+      <h2>Not a full agent framework</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>LangGraph / Temporal / …</th><th>Loom stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Scope</td><td>Orchestration, graphs, infra</td><td>Focused primitives you compose</td></tr>
+            <tr><td>Philosophy</td><td>Platform</td><td>Libraries</td></tr>
+            <tr><td>Tracing</td><td>Often hosted</td><td>Local HTML (flow-xray)</td></tr>
+            <tr><td>Claim</td><td>Often broad</td><td>Runtime shape + durability + inspect</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quickstart" class="panel">
+      <h2>Quick start</h2>
+      <pre><code># 1. Stack-safe loop shape
+pip install loom-tailcalls
+
+# 2. Durable run + inspect
+pip install loom-runner
+
+# 3. Optional local trace
+pip install flow-xray
+
+# Example (loom-runner)
+loom-runner run examples/counter_agent.py --run-id demo --db runs.sqlite --max-steps 5
+loom-runner resume examples/counter_agent.py --run-id demo --db runs.sqlite
+loom-runner explain examples/counter_agent.py --run-id demo --db runs.sqlite
+loom-runner run examples/counter_agent.py --run-id demo --trace trace.html</code></pre>
+      <p>Integration lab in <a href="https://github.com/kroq86/loom-tailcalls/tree/main/demo-loom-flow">demo-loom-flow</a> combines tailcalls + flow-xray (+ optional Ollama).</p>
+    </section>
+
+    <section id="agi" class="panel note">
+      <h2>AGI and marketing</h2>
+      <p>There is <strong>no direct AGI claim</strong>. Autonomous systems are modeled as long state machines: think → act → observe → checkpoint → resume. Loom stack covers <strong>shape, durability, and local observability</strong> for that pattern — building blocks for agent runtimes, not a path to superintelligence.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>MIT · <a href="https://github.com/kroq86/loom-tailcalls">loom-tailcalls</a> · <a href="https://github.com/kroq86/loom-runner">loom-runner</a> · <a href="https://github.com/kroq86/flow-xray">flow-xray</a></p>
+  </footer>
+</body>
+</html>
